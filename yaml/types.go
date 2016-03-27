@@ -69,11 +69,12 @@ type Vargs map[string]interface{}
 // used at runtime to decide if a particular
 // plugin should be executed or skipped.
 type Filter struct {
-	Repo    string
-	Branch  Stringorslice
-	Event   Stringorslice
-	Success string
-	Failure string
-	Change  string
-	Matrix  map[string]string
+	Repo    	string
+	Branch  	Stringorslice
+	Event   	Stringorslice
+	Success 	string
+	Failure 	string
+	Change  	string
+	Matrix  	map[string]string
+	Environment	Stringorslice
 }
