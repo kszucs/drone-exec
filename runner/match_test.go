@@ -66,7 +66,7 @@ func TestParse(t *testing.T) {
 		})
 
 		g.It("Should match an environment", func() {
-			g.Assert(matchEvironment([]string{"dev"}, "dev")).Equal(true)
+			g.Assert(matchEnvironment([]string{"dev"}, "dev")).Equal(true)
 		})
 	})
 
