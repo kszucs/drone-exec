@@ -95,6 +95,7 @@ func TestParse(t *testing.T) {
 			g.Assert(s[0].Filter.Branch.Slice()).Equal([]string{"master"})
 			g.Assert(s[1].Filter.Repo).Equal("octocat/helloworld")
 			g.Assert(s[1].Filter.Matrix).Equal(map[string]string{"go_version": "1.5"})
+			g.Assert(s[1].Filter.Environment.Slice()).Equal([]string{"dev"})
 		})
 
 		g.It("Should error when Yaml is malformed", func() {
@@ -177,6 +178,7 @@ deploy:
       branch: somebranch
       matrix:
         go_version: 1.5
+      environment: dev
   docker:
     repo: foo/bar
     tag: latest

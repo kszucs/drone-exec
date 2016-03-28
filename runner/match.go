@@ -12,7 +12,6 @@ import (
 // isMatch is a helper function that returns true if
 // all criteria is matched.
 func isMatch(node *parser.FilterNode, s *State) (match bool) {
-
 	var last string
 	if s.BuildLast != nil {
 		last = s.BuildLast.Status
@@ -26,6 +25,8 @@ func isMatch(node *parser.FilterNode, s *State) (match bool) {
 	case !matchRepo(node.Repo, s.Repo.FullName):
 		return false
 	case !matchEvent(node.Event, s.Build.Event):
+		return false
+	case !matchEnvironment(node.Environment, s.Build.Deploy):
 		return false
 	}
 
@@ -131,6 +132,19 @@ func matchChange(toggle, status, last string) bool {
 		status = plugin.StateSuccess
 	}
 	return ok && status != last
+}
+
+func matchEnvironment(want []string, got string) (match bool) {
+	if len(want) == 0 {
+		return true
+	}
+	for _, want_ := range want {
+		if got == want_ {
+			match = true
+			break
+		}
+	}
+	return
 }
 
 func parseBool(str string) (value bool, err error) {

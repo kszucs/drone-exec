@@ -108,26 +108,28 @@ func newBuildNode(typ NodeType, b yaml.Build) *DockerNode {
 type FilterNode struct {
 	NodeType
 
-	Repo    string
-	Branch  []string
-	Event   []string
-	Success string
-	Failure string
-	Change  string
-	Matrix  map[string]string
+	Repo        string
+	Branch      []string
+	Event       []string
+	Success     string
+	Failure     string
+	Change      string
+	Matrix      map[string]string
+	Environment []string
 
 	Node Node // Node to execution if conditions met
 }
 
 func newFilterNode(filter yaml.Filter) *FilterNode {
 	return &FilterNode{
-		NodeType: NodeFilter,
-		Repo:     filter.Repo,
-		Branch:   filter.Branch.Slice(),
-		Event:    filter.Event.Slice(),
-		Matrix:   filter.Matrix,
-		Success:  filter.Success,
-		Failure:  filter.Failure,
-		Change:   filter.Change,
+		NodeType:       NodeFilter,
+		Repo:           filter.Repo,
+		Branch:         filter.Branch.Slice(),
+		Event:          filter.Event.Slice(),
+		Matrix:         filter.Matrix,
+		Success:        filter.Success,
+		Failure:        filter.Failure,
+		Change:         filter.Change,
+		Environment:    filter.Environment.Slice(),
 	}
 }

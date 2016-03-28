@@ -64,6 +64,10 @@ func TestParse(t *testing.T) {
 		g.It("Should match an event", func() {
 			g.Assert(matchBranch([]string{"deployment"}, "deployment")).Equal(true)
 		})
+
+		g.It("Should match an environment", func() {
+			g.Assert(matchEnvironment([]string{"dev"}, "dev")).Equal(true)
+		})
 	})
 
 }
