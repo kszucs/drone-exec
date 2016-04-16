@@ -111,6 +111,11 @@ func toEnv(s *State) []string {
 		envs = append(envs, fmt.Sprintf("CI_PULL_REQUEST=%s", pullRegexp.FindString(s.Build.Ref)))
 		envs = append(envs, fmt.Sprintf("DRONE_PULL_REQUEST=%s", pullRegexp.FindString(s.Build.Ref)))
 	}
+	
+	if s.Build.Event == "deployment" {
+		envs = append(envs, fmt.Sprintf("CI_DEPLOY_TO=%s", s.Build.Deploy))
+		envs = append(envs, fmt.Sprintf("DRONE_DEPLOY_TO=%s", s.Build.Deploy))
+	}
 
 	// environment variables for the current matrix axis
 	for key, val := range s.Job.Environment {
