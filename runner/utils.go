@@ -111,7 +111,7 @@ func toEnv(s *State) []string {
 		envs = append(envs, fmt.Sprintf("CI_PULL_REQUEST=%s", pullRegexp.FindString(s.Build.Ref)))
 		envs = append(envs, fmt.Sprintf("DRONE_PULL_REQUEST=%s", pullRegexp.FindString(s.Build.Ref)))
 	}
-	
+
 	if s.Build.Event == "deployment" {
 		envs = append(envs, fmt.Sprintf("CI_DEPLOY_TO=%s", s.Build.Deploy))
 		envs = append(envs, fmt.Sprintf("DRONE_DEPLOY_TO=%s", s.Build.Deploy))
@@ -124,7 +124,7 @@ func toEnv(s *State) []string {
 
 	if s.Build.Event == plugin.EventTag {
 		tag := strings.TrimPrefix(s.Build.Ref, "refs/tags/")
-		envs = append(envs, fmt.Sprintf("CI_TAG=%d", tag))
+		envs = append(envs, fmt.Sprintf("CI_TAG=%s", tag))
 		envs = append(envs, fmt.Sprintf("DRONE_TAG=%s", tag))
 	}
 
