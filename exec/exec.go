@@ -136,6 +136,16 @@ func Exec(payload Payload, opt Options, outw, errw io.Writer) error {
 	payload.Workspace.Root = "/drone/src"
 	log.Debugf("Using workspace %s", payload.Workspace.Path)
 
+	client, err := dockerclient.NewDockerClient("unix:///var/run/docker.sock", nil)
+	if err != nil {
+		return err
+	}
+
+	info, err := client.Info()
+	if err != nil {
+		return err
+	}
+
 	rules := []parser.RuleFunc{
 		parser.ImageName,
 		parser.ImageMatchFunc(payload.System.Plugins),
@@ -143,6 +153,7 @@ func Exec(payload Payload, opt Options, outw, errw io.Writer) error {
 		parser.SanitizeFunc(payload.Repo.IsTrusted), //&& !plugin.PullRequest(payload.Build)
 		parser.CacheFunc(payload.Repo.FullName),
 		parser.DebugFunc(yaml.ParseDebugString(payload.Yaml)),
+		parser.StorageDriverFunc(info.Driver),
 		parser.Escalate,
 		parser.HttpProxy,
 		parser.DefaultNotifyFilter,
@@ -167,11 +178,6 @@ func Exec(payload Payload, opt Options, outw, errw io.Writer) error {
 		return err
 	}
 	r := runner.Load(tree)
-
-	client, err := dockerclient.NewDockerClient("unix:///var/run/docker.sock", nil)
-	if err != nil {
-		return err
-	}
 
 	// // creates a wrapper Docker client that uses an ambassador
 	// // container to create a pod-like environment.
