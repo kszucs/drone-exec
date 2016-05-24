@@ -26,6 +26,7 @@ type Container struct {
 	Volumes        []string
 	Devices        []string
 	Net            string
+	Pid            string
 	DNS            Stringorslice
 	AuthConfig     AuthConfig `yaml:"auth_config"`
 	Memory         int64      `yaml:"mem_limit"`
@@ -69,12 +70,12 @@ type Vargs map[string]interface{}
 // used at runtime to decide if a particular
 // plugin should be executed or skipped.
 type Filter struct {
-	Repo    	string
-	Branch  	Stringorslice
-	Event   	Stringorslice
-	Success 	string
-	Failure 	string
-	Change  	string
-	Matrix  	map[string]string
-	Environment	Stringorslice
+	Repo        string
+	Branch      Stringorslice
+	Event       Stringorslice
+	Success     string
+	Failure     string
+	Change      string
+	Matrix      map[string]string
+	Environment Stringorslice
 }

@@ -45,6 +45,10 @@ func TestParse(t *testing.T) {
 			g.Assert(conf.Build.Slice()[0].Net).Equal("bridge")
 		})
 
+		g.It("Should parse pid namespace mode configuration", func() {
+			g.Assert(conf.Build.Slice()[0].Pid).Equal("host")
+		})
+
 		g.It("Should parse environment variable map", func() {
 			g.Assert(conf.Clone.Environment.Slice()).Equal(
 				[]string{"GIT_DIR=.git"},
@@ -149,6 +153,7 @@ build:
   volumes:
     - /tmp/volumes
   net: bridge
+  pid: host
   privileged: true
   auth_config:
     password: test

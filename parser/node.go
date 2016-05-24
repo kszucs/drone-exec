@@ -61,6 +61,7 @@ type DockerNode struct {
 	Devices        []string
 	ExtraHosts     []string
 	Net            string
+	Pid            string
 	DNS            []string
 	AuthConfig     yaml.AuthConfig
 	Memory         int64
@@ -82,6 +83,7 @@ func newDockerNode(typ NodeType, c yaml.Container) *DockerNode {
 		Devices:        c.Devices,
 		ExtraHosts:     c.ExtraHosts,
 		Net:            c.Net,
+		Pid:            c.Pid,
 		DNS:            c.DNS.Slice(),
 		AuthConfig:     c.AuthConfig,
 		Memory:         c.Memory,
@@ -122,14 +124,14 @@ type FilterNode struct {
 
 func newFilterNode(filter yaml.Filter) *FilterNode {
 	return &FilterNode{
-		NodeType:       NodeFilter,
-		Repo:           filter.Repo,
-		Branch:         filter.Branch.Slice(),
-		Event:          filter.Event.Slice(),
-		Matrix:         filter.Matrix,
-		Success:        filter.Success,
-		Failure:        filter.Failure,
-		Change:         filter.Change,
-		Environment:    filter.Environment.Slice(),
+		NodeType:    NodeFilter,
+		Repo:        filter.Repo,
+		Branch:      filter.Branch.Slice(),
+		Event:       filter.Event.Slice(),
+		Matrix:      filter.Matrix,
+		Success:     filter.Success,
+		Failure:     filter.Failure,
+		Change:      filter.Change,
+		Environment: filter.Environment.Slice(),
 	}
 }
