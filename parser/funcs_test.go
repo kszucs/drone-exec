@@ -414,6 +414,7 @@ func Test_Funcs(t *testing.T) {
 				node.Volumes = []string{`some stuff`}
 				node.Devices = []string{`some devices`}
 				node.Net = `someNet`
+				node.Pid = `somePid`
 				node.Entrypoint = []string{`super entrypoint`}
 			})
 
@@ -423,6 +424,7 @@ func Test_Funcs(t *testing.T) {
 				g.Assert(node.Volumes).Equal([]string(nil))
 				g.Assert(node.Devices).Equal([]string(nil))
 				g.Assert(node.Net).Equal(``)
+				g.Assert(node.Pid).Equal(``)
 				g.Assert(node.Entrypoint).Equal([]string{})
 			})
 
@@ -455,6 +457,7 @@ func Test_Funcs(t *testing.T) {
 				node.Volumes = []string{`some stuff`}
 				node.Devices = []string{`some:device`}
 				node.Net = `someNet`
+				node.Pid = `somePid`
 				node.Entrypoint = []string{`super entrypoint`}
 			})
 
@@ -475,6 +478,7 @@ func Test_Funcs(t *testing.T) {
 							g.Assert(node.Volumes).Equal([]string(nil))
 							g.Assert(node.Devices).Equal([]string(nil))
 							g.Assert(node.Net).Equal(``)
+							g.Assert(node.Pid).Equal(``)
 							g.Assert(node.Entrypoint).Equal([]string{})
 						})
 
@@ -494,6 +498,7 @@ func Test_Funcs(t *testing.T) {
 							g.Assert(node.Volumes).Equal([]string(nil))
 							g.Assert(node.Devices).Equal([]string(nil))
 							g.Assert(node.Net).Equal(``)
+							g.Assert(node.Pid).Equal(``)
 							g.Assert(node.Entrypoint).Equal([]string{})
 						})
 
@@ -513,6 +518,7 @@ func Test_Funcs(t *testing.T) {
 							g.Assert(node.Volumes).Equal([]string(nil))
 							g.Assert(node.Devices).Equal([]string(nil))
 							g.Assert(node.Net).Equal(``)
+							g.Assert(node.Pid).Equal(``)
 							g.Assert(node.Entrypoint).Equal([]string{})
 						})
 
@@ -534,6 +540,7 @@ func Test_Funcs(t *testing.T) {
 						g.Assert(node.Volumes).Equal([]string{`some stuff`})
 						g.Assert(node.Devices).Equal([]string{`some:device`})
 						g.Assert(node.Net).Equal(`someNet`)
+						g.Assert(node.Pid).Equal(`somePid`)
 						g.Assert(node.Entrypoint).Equal([]string{`super entrypoint`})
 					})
 

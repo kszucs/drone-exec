@@ -117,6 +117,7 @@ func TestParse(t *testing.T) {
 			g.Assert(conf.Build.Slice()[0].Commands).Equal([]string{"go build", "go test"})
 			g.Assert(conf.Build.Slice()[0].Volumes).Equal([]string{"/tmp/volumes"})
 			g.Assert(conf.Build.Slice()[0].Net).Equal("bridge")
+			g.Assert(conf.Build.Slice()[0].Pid).Equal("host")
 			g.Assert(conf.Build.Slice()[0].Privileged).Equal(true)
 		})
 
@@ -218,6 +219,7 @@ build_values: &BUILD_VALUES
   volumes:
     - /tmp/volumes
   net: bridge
+  pid: host
 
 build:
   <<: *BUILD_VALUES

@@ -125,6 +125,7 @@ func Sanitize(n Node) error {
 	d.Volumes = nil
 	d.Devices = nil
 	d.Net = ""
+	d.Pid = ""
 	d.Entrypoint = []string{}
 	d.DNS = []string{}
 	return nil
@@ -153,6 +154,7 @@ func Escalate(n Node) error {
 		d.Volumes = nil
 		d.Devices = nil
 		d.Net = ""
+		d.Pid = ""
 		d.Entrypoint = []string{}
 	}
 	return nil
